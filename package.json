@@ -1,0 +1,27 @@
+{
+  "name": "cse340",
+  "version": "1.0.0",
+  "description": "Server-side web app built with Node.js, Express, EJS, and PostgreSQL for BYU-Idaho CSE 340 (Web Backend Development).",
+  "homepage": "https://github.com/Alonso0099/CSE340#readme",
+  "bugs": {
+    "url": "https://github.com/Alonso0099/CSE340/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alonso0099/CSE340.git"
+  },
+  "license": "ISC",
+  "author": "Alonso Alvarado",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+  "dev": "nodemon",
+  "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
