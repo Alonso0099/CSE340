@@ -1,30 +1,208 @@
-html, body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+/* Variables Colors and Fonts */
+:root {
+    --color-primary: #0f5257;
+    --color-primary-dark: #0a3a3e;
+    --color-accent: #f2a541;
+    --color-bg: #fdfaf3;
+    --color-surface: #ffffff;
+    --color-text: #1f2933;
+    --color-text-light: #4a5560;
+    --font-main: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --radius: 8px;
+    --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
+* {
+    box-sizing: border-box;
+}
+
+/* Base Styles Mobile First*/ 
 body {
-    nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    margin: 0;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+h1,
+h2,
+h3 {
+    color: var(--color-primary);
+    line-height: 1.2;
+}
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
+h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--color-primary);
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Header and navigation */
+
+.site-header {
+    background-color: var(--color-primary);
+    padding: 1rem;
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.site-name {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.25rem;
+}
+
+nav a {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    border-bottom: 3px solid transparent;
+}
+
+nav a:hover {
+    border-bottom-color: var(--color-accent);
+}
+
+/* Home page */
+.hero {
+    text-align: center;
+}
+
+.hero p {
+    max-width: 60ch;
+    margin: 0 auto 1.5rem;
+}
+
+.main-logo {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Cards (organizations and projects) */
+.card-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--color-surface);
+    border-top: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.card h2,
+.card h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+}
+
+.card p {
+    margin: 0;
+    color: var(--color-text-light);
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 0 auto 1rem;
+}
+
+/* Categories */
+.category-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.category-list li {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-primary-dark);
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Larger screens (tablet and desktop) */
+@media (min-width: 768px) {
+    .header-content {
+        flex-direction: row;
+        justify-content: space-between;
     }
-}  
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
