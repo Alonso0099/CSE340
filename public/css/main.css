@@ -8,6 +8,7 @@
     --color-text: #1f2933;
     --color-text-light: #4a5560;
     --font-main: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-heading: "Poppins", system-ui, sans-serif;
     --radius: 8px;
     --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
@@ -16,7 +17,7 @@
     box-sizing: border-box;
 }
 
-/* Base Styles Mobile First*/ 
+/* Base Styles Mobile First */ 
 body {
     margin: 0;
     font-family: var(--font-main);
@@ -42,6 +43,7 @@ h2,
 h3 {
     color: var(--color-primary);
     line-height: 1.2;
+    font-family: var(--font-heading);
 }
 
 h1 {
@@ -65,7 +67,6 @@ a:focus-visible {
 }
 
 /* Header and navigation */
-
 .site-header {
     background-color: var(--color-primary);
     padding: 1rem;
@@ -85,6 +86,8 @@ a:focus-visible {
     font-size: 1.25rem;
     font-weight: bold;
     text-decoration: none;
+    font-family: var(--font-heading);
+
 }
 
 nav ul {
