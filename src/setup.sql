@@ -14,7 +14,6 @@ INSERT INTO organization (name, description, contact_email, logo_filename) VALUE
 ('GreenHarvest Growers', 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
 ('UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'unityserve-logo.png');
 
-
 -- ========================================
 -- Project Table
 -- ========================================
@@ -52,3 +51,56 @@ INSERT INTO project (organization_id, title, description, location, date) VALUES
 (3, 'Senior Center Visit', 'Spend an afternoon playing games and visiting with seniors.', 'Sunrise Senior Living', '2027-02-13'),
 (3, 'Literacy Night', 'Read with children and help them choose free books to take home.', 'Westside Library', '2027-03-06'),
 (3, 'Park Cleanup Day', 'Pick up litter and plant flowers at a city park.', 'Riverside Park', '2027-04-17');
+
+
+-- ========================================
+-- Category Table
+-- ========================================
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name        VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Project-Category Junction Table (many-to-many)
+-- ========================================
+CREATE TABLE project_category (
+    project_id  INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_project_category_project
+        FOREIGN KEY (project_id) REFERENCES project (project_id),
+    CONSTRAINT fk_project_category_category
+        FOREIGN KEY (category_id) REFERENCES category (category_id)
+);
+
+-- ========================================
+-- Insert sample data: Categories
+-- ========================================
+INSERT INTO category (name) VALUES
+('Environmental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness');
+
+
+-- ========================================
+-- Insert sample data: Project categories
+-- 1 Environmental, 2 Educational, 3 Community Service, 4 Health and Wellness
+-- ========================================
+INSERT INTO project_category (project_id, category_id) VALUES
+(1, 3),            -- Community Center Roof Repair
+(2, 3), (2, 4),    -- Accessible Ramp Build
+(3, 3), (3, 4),    -- Playground Restoration
+(4, 3),            -- Habitat Home Framing
+(5, 1), (5, 3),    -- Solar Lighting Installation
+(6, 1),            -- Winter Greenhouse Setup
+(7, 1), (7, 2),    -- Composting Workshop
+(8, 1),            -- Seed Starting Day
+(9, 1), (9, 2),    -- School Garden Build
+(10, 3), (10, 4),  -- Spring Harvest Market
+(11, 3),           -- Holiday Food Drive
+(12, 3),           -- Warm Coat Distribution
+(13, 4),           -- Senior Center Visit
+(14, 2),           -- Literacy Night
+(15, 1), (15, 3);  -- Park Cleanup Day
