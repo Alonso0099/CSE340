@@ -181,7 +181,40 @@ nav a:hover {
     padding: 0.75rem 1.5rem;
     border-radius: 999px;
 }
+.category-list a {
+    color: #ffffff;
+    text-decoration: none;
+}
 
+.category-list a:hover {
+    text-decoration: underline;
+}
+
+/* Category tags on project details */
+.tag-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 999px;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.tag:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
 /* Footer */
 footer {
     background-color: var(--color-primary-dark);
