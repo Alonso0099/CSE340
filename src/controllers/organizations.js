@@ -77,10 +77,15 @@ const processNewOrganizationForm = async (req, res) => {
     req.flash('success', 'Organization added successfully!');
     res.redirect(`/organization/${organizationId}`);
 };
-const showEditOrganizationForm = async (req, res) => {
+const showEditOrganizationForm = async (req, res, next) => {
     const organizationId = req.params.id;
     const organizationDetails = await getOrganizationDetails(organizationId);
-
+    
+    if (!organizationDetails) {
+        const err = new Error('Organization Not Found');
+        err.status = 404;
+        return next(err);
+    }
     const title = 'Edit Organization';
     res.render('edit-organization', { title, organizationDetails });
 };
