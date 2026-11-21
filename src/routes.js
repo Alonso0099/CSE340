@@ -11,7 +11,8 @@ import {
 } from './controllers/organizations.js';
 import { 
     showProjectsPage, showProjectDetailsPage,
-    showNewProjectForm, processNewProjectForm, projectValidation
+    showNewProjectForm, processNewProjectForm, projectValidation,
+    showEditProjectForm, processEditProjectForm
 } from './controllers/projects.js';
 import { 
     showCategoriesPage, showCategoryDetailsPage,
@@ -44,6 +45,9 @@ router.post('/new-organization', organizationValidation, processNewOrganizationF
 router.post('/new-project', projectValidation, processNewProjectForm);
 // Routes to handle the assign categories to project form
 router.post('/assign-categories/:projectId', processAssignCategoriesForm);
+// Routes to display and handle the edit project form
+router.get('/edit-project/:id', showEditProjectForm);
+router.post('/edit-project/:id', projectValidation, processEditProjectForm);
 
 // Error-handling test route
 router.get('/test-error', testErrorPage);

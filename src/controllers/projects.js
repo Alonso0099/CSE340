@@ -1,7 +1,7 @@
 // Import any needed model functions
 import { getUpcomingProjects, getProjectDetails } from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
-import { createProject } from '../models/projects.js';
+import { createProject, updateProject } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
 
@@ -82,7 +82,47 @@ const projectValidation = [
         .notEmpty().withMessage('Organization is required')
         .isInt().withMessage('Organization must be a valid integer')
 ];
+
+const showEditProjectForm = async (req, res, next) => {
+    const projectId = req.params.id;
+    const project = await getProjectDetails(projectId);
+
+    if (!project) {
+        const err = new Error('Project Not Found');
+        err.status = 404;
+        return next(err);
+    }
+
+    const organizations = await getAllOrganizations();
+
+    // The date input needs YYYY-MM-DD ('en-CA' gives that format)
+    const dateValue = project.date.toLocaleDateString('en-CA');
+
+    const title = 'Edit Service Project';
+    res.render('edit-project', { title, project, organizations, dateValue });
+};
+
+const processEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        errors.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+        return res.redirect('/edit-project/' + projectId);
+    }
+
+    const { title, description, location, date, organizationId } = req.body;
+
+    await updateProject(projectId, title, description, location, date, organizationId);
+
+    req.flash('success', 'Service project updated successfully!');
+    res.redirect(`/project/${projectId}`);
+};
+
 // Export any controller functions
-export { showProjectsPage, showProjectDetailsPage, 
-        processNewProjectForm,showNewProjectForm, 
-        projectValidation};
+export { showProjectsPage, showProjectDetailsPage,
+        processNewProjectForm, showNewProjectForm,
+        projectValidation, showEditProjectForm, processEditProjectForm };
