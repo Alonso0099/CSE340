@@ -304,6 +304,17 @@ form button[type="submit"]:hover {
     margin-right: 0.5rem;
 }
 
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.checkbox-row label {
+    margin-bottom: 0;
+}
+
+
 /* Larger screens (tablet and desktop) */
 @media (min-width: 768px) {
     .header-content {
