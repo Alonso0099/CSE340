@@ -62,6 +62,7 @@ app.use((req, res, next) => {
     }
 
     res.locals.NODE_ENV = NODE_ENV;
+    res.locals.user = req.session.user || null;
     next();
 });
 
