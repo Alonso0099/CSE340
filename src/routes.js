@@ -22,43 +22,58 @@ import {
     categoryValidation 
 } from './controllers/categories.js';
 import { testErrorPage } from './controllers/errors.js';
-
+import { 
+    showUserRegistrationForm, 
+    processUserRegistrationForm, 
+    showLoginForm,  
+    processLoginForm, 
+    processLogout,
+    requireLogin,
+    showDashboard
+} from './controllers/users.js';
 
 const router = express.Router();
 
+// Home
 router.get('/', showHomePage);
+
+// Organizations
 router.get('/organizations', showOrganizationsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
+router.get('/new-organization', showNewOrganizationForm);
+router.post('/new-organization', organizationValidation, processNewOrganizationForm);
+router.get('/edit-organization/:id', showEditOrganizationForm);
+router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
+
+// Projects
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
-router.get('/categories', showCategoriesPage);
-router.get('/category/:id', showCategoryDetailsPage);
-router.get('/new-organization', showNewOrganizationForm);
-// Route to display the edit organization form
-router.get('/edit-organization/:id', showEditOrganizationForm);
-// Route for new project page
 router.get('/new-project', showNewProjectForm);
-// Routes to handle the assign categories to project form
-router.get('/assign-categories/:projectId', showAssignCategoriesForm);
-// Routes to display and handle the new category form
-router.get('/new-category', showNewCategoryForm);
-router.post('/new-category', categoryValidation, processNewCategoryForm);
-// Routes to display and handle the edit category form
-router.get('/edit-category/:id', showEditCategoryForm);
-router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
-// Route to handle the edit organization form submission
-router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
-// Route to handle new organization form submission
-router.post('/new-organization', organizationValidation, processNewOrganizationForm);
-// Route to handle new project form submission
 router.post('/new-project', projectValidation, processNewProjectForm);
-// Routes to handle the assign categories to project form
-router.post('/assign-categories/:projectId', processAssignCategoriesForm);
-// Routes to display and handle the edit project form
 router.get('/edit-project/:id', showEditProjectForm);
 router.post('/edit-project/:id', projectValidation, processEditProjectForm);
 
-// Error-handling test route
+// Categories
+router.get('/categories', showCategoriesPage);
+router.get('/category/:id', showCategoryDetailsPage);
+router.get('/new-category', showNewCategoryForm);
+router.post('/new-category', categoryValidation, processNewCategoryForm);
+router.get('/edit-category/:id', showEditCategoryForm);
+router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
+router.get('/assign-categories/:projectId', showAssignCategoriesForm);
+router.post('/assign-categories/:projectId', processAssignCategoriesForm);
+
+// Users
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+router.get('/logout', processLogout);
+
+// Protected dashboard route
+router.get('/dashboard', requireLogin, showDashboard);
+
+// Error test
 router.get('/test-error', testErrorPage);
 
 
